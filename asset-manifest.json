@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/centro-eventos-app/static/css/main.67ca8e01.css",
+    "main.js": "/centro-eventos-app/static/js/main.6068cde3.js",
+    "static/js/453.f73acf89.chunk.js": "/centro-eventos-app/static/js/453.f73acf89.chunk.js",
+    "index.html": "/centro-eventos-app/index.html",
+    "main.67ca8e01.css.map": "/centro-eventos-app/static/css/main.67ca8e01.css.map",
+    "main.6068cde3.js.map": "/centro-eventos-app/static/js/main.6068cde3.js.map",
+    "453.f73acf89.chunk.js.map": "/centro-eventos-app/static/js/453.f73acf89.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.67ca8e01.css",
+    "static/js/main.6068cde3.js"
+  ]
+}
