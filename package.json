@@ -2,6 +2,7 @@
   "name": "centro-eventos-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://javinunezr.github.io/centro-eventos-app",
   "dependencies": {
     "@graphql-tools/mock": "^9.1.3",
     "@graphql-tools/schema": "^10.0.29",
@@ -21,7 +22,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -45,5 +48,8 @@
     "workerDirectory": [
       "public"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
