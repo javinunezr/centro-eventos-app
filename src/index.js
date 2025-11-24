@@ -5,10 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 async function enableMocking() {
-  if (process.env.NODE_ENV !== 'development') {
-    return
-  }
-
+  // Habilitar MSW tanto en desarrollo como en producción para GitHub Pages
   console.log('Iniciando MSW...');
   const { worker } = await import('./mocks/browser')
   
