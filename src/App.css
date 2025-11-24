@@ -1,38 +1,221 @@
+/* Estilos generales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background-color: #f8f9fa;
+}
+
+/* Header */
+.App-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 25px;
   color: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-.App-link {
-  color: #61dafb;
+.App-header h1 {
+  font-size: 2.2rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Contenido principal */
+.content {
+  display: flex;
+  padding: 0;
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Menú lateral */
+.side-menu {
+  width: 250px;
+  padding: 25px;
+  background-color: white;
+  text-align: left;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  height: fit-content;
+}
+
+.side-menu h2 {
+  color: #495057;
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  font-weight: 500;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 10px;
+}
+
+.side-menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.side-menu ul li {
+  margin-bottom: 12px;
+}
+
+.side-menu ul li a {
+  color: #495057;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 12px 16px;
+  border-radius: 8px;
+  display: block;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+}
+
+.side-menu ul li a:hover {
+  background-color: #f8f9fa;
+  color: #667eea;
+  border-left: 3px solid #667eea;
+  transform: translateX(5px);
+  text-decoration: none;
+}
+
+/* Área de contenido principal */
+.book-list {
+  flex-grow: 1;
+  padding: 25px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.book-list h2 {
+  color: #495057;
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+/* Tarjetas de eventos */
+.book {
+  border: none;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  border-left: 4px solid #667eea;
+  width: 100%;
+}
+
+.book:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.book h3 {
+  color: #495057;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.book p {
+  color: #6c757d;
+  margin-bottom: 3px;
+  line-height: 1.2;
+  font-size: 0.9rem;
+}
+
+.book p strong {
+  color: #495057;
+  font-weight: 600;
+}
+
+/* Botones */
+button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Estados de carga y error */
+.book-list p {
+  color: #6c757d;
+  font-size: 1.1rem;
+  text-align: center;
+  padding: 40px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+/* Footer */
+footer {
+  margin-top: auto;
+  padding: 20px;
+  background-color: #495057;
+  color: #adb5bd;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .side-menu {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .App-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .book {
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .App-header {
+    padding: 15px;
+  }
+  
+  .App-header h1 {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+  }
+  
+  .side-menu, .book-list {
+    padding: 15px;
   }
 }

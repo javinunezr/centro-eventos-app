@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+# Centro de Eventos
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Una aplicación web moderna para la gestión y visualización de eventos, desarrollada con React y que demuestra el uso de APIs REST y GraphQL.
 
-## Available Scripts
 
-In the project directory, you can run:
+## Descripción
+
+Centro de Eventos es una aplicación web que permite a los usuarios explorar y descubrir eventos organizados por categorías. La aplicación implementa una arquitectura híbrida que combina:
+
+- **API REST** para la obtención de listas de eventos por categoría
+- **API GraphQL** para consultar detalles específicos de eventos
+- **Mock Service Worker (MSW)** para simular las APIs durante el desarrollo
+
+## Características
+
+- **Navegación por categorías**: Conciertos, Conferencias, Deportes, Teatros
+- **Diseño responsivo** con interfaz moderna y atractiva
+- **Enrutamiento dinámico** con React Router
+- **Carga asíncrona** de datos con estados de loading y error
+- **Detalles completos** de eventos con información del organizador
+- **Datos simulados** para desarrollo y testing
+
+## Arquitectura Técnica
+
+### APIs Implementadas
+
+1. **REST API** (`/api/eventos`)
+   - Listado de eventos por categoría
+   - Filtrado y búsqueda
+   - Respuestas JSON estructuradas
+
+2. **GraphQL API** (`/api/graphql`)
+   - Consultas específicas de detalles de eventos
+   - Schema flexible para datos complejos
+   - Optimización de consultas
+
+## Funcionalidades Principales
+
+### 1. Exploración por Categorías
+Los usuarios pueden navegar entre diferentes tipos de eventos:
+- **Conciertos**: Eventos musicales y espectáculos en vivo
+- **Conferencias**: Eventos corporativos y educativos
+- **Deportes**: Competencias y eventos deportivos
+- **Teatros**: Obras de teatro y espectáculos artísticos
+
+### 2. Lista de Eventos
+- Visualización de eventos por categoría
+- Información básica: nombre, fecha, lugar
+- Navegación fluida entre categorías
+
+### 3. Detalles de Eventos
+- Información completa del evento
+- Datos del organizador
+- Número de asistentes confirmados
+- Descripción detallada
+
+## Scripts Disponibles
 
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Ejecuta la aplicación en modo desarrollo.\
+Abre [http://localhost:3000](http://localhost:3000) para verla en el navegador.
 
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Lanza el runner de pruebas en modo interactivo.
 
 ### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Construye la aplicación para producción en la carpeta `build`.\
+Optimiza la construcción para el mejor rendimiento.
 
 ### `npm run eject`
+**Nota: Esta es una operación irreversible.**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Testing y Desarrollo
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+La aplicación utiliza Mock Service Worker para simular las APIs durante el desarrollo:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Datos realistas**: Eventos con información completa y variada
+- **Latencia simulada**: Delays realistas para testing de loading states
+- **Manejo de errores**: Simulación de estados de error para robustez
