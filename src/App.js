@@ -6,7 +6,7 @@ import './App.css';
 function App() {
   console.log('App component is rendering...');
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <div className="App">
         <header className="App-header">
           <h1>🍳 Recetas Deliciosas</h1>
