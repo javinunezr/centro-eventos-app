@@ -1,19 +1,17 @@
 {
   "files": {
-    "main.css": "/centro-eventos-app/static/css/main.67ca8e01.css",
-    "main.js": "/centro-eventos-app/static/js/main.27a3fb46.js",
-    "static/js/209.0e5cb0d7.chunk.js": "/centro-eventos-app/static/js/209.0e5cb0d7.chunk.js",
-    "static/js/453.f73acf89.chunk.js": "/centro-eventos-app/static/js/453.f73acf89.chunk.js",
-    "static/js/138.bf9ca272.chunk.js": "/centro-eventos-app/static/js/138.bf9ca272.chunk.js",
-    "index.html": "/centro-eventos-app/index.html",
-    "main.67ca8e01.css.map": "/centro-eventos-app/static/css/main.67ca8e01.css.map",
-    "main.27a3fb46.js.map": "/centro-eventos-app/static/js/main.27a3fb46.js.map",
-    "209.0e5cb0d7.chunk.js.map": "/centro-eventos-app/static/js/209.0e5cb0d7.chunk.js.map",
-    "453.f73acf89.chunk.js.map": "/centro-eventos-app/static/js/453.f73acf89.chunk.js.map",
-    "138.bf9ca272.chunk.js.map": "/centro-eventos-app/static/js/138.bf9ca272.chunk.js.map"
+    "main.css": "/recetario-app/static/css/main.67ca8e01.css",
+    "main.js": "/recetario-app/static/js/main.a86acfbe.js",
+    "static/js/209.65871a45.chunk.js": "/recetario-app/static/js/209.65871a45.chunk.js",
+    "static/js/138.bf9b3234.chunk.js": "/recetario-app/static/js/138.bf9b3234.chunk.js",
+    "index.html": "/recetario-app/index.html",
+    "main.67ca8e01.css.map": "/recetario-app/static/css/main.67ca8e01.css.map",
+    "main.a86acfbe.js.map": "/recetario-app/static/js/main.a86acfbe.js.map",
+    "209.65871a45.chunk.js.map": "/recetario-app/static/js/209.65871a45.chunk.js.map",
+    "138.bf9b3234.chunk.js.map": "/recetario-app/static/js/138.bf9b3234.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.67ca8e01.css",
-    "static/js/main.27a3fb46.js"
+    "static/js/main.a86acfbe.js"
   ]
 }
