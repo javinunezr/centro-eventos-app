@@ -2,19 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 
 async function enableMocking() {
-  // Habilitar MSW tanto en desarrollo como en producción para GitHub Pages
+  // Habilitar MSW solo en el navegador
   console.log('Iniciando MSW...');
-  const { worker } = await import('./mocks/browser')
+  
+  const { worker } = await import('./mocks/browser');
   
   return worker.start({
+    serviceWorker: {
+      url: '/mockServiceWorker.js'
+    },
     onUnhandledRequest: 'bypass',
+    quiet: false
   }).then(() => {
     console.log('MSW iniciado correctamente');
   }).catch((error) => {
     console.error('Error iniciando MSW:', error);
+    // No lanzar el error para que la app pueda iniciarse sin MSW si falla
   });
 }
 
@@ -26,5 +31,3 @@ enableMocking().then(() => {
     </React.StrictMode>
   );
 })
-
-reportWebVitals();

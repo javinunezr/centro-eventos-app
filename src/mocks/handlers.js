@@ -1,9 +1,9 @@
 import { http, HttpResponse, delay } from 'msw';
 
-// API REST mock para listar eventos
+// API REST mock para listar recetas
 export const handlers = [
-    // API REST - Lista de eventos por categoría
-    http.get('/api/eventos', async ({ request }) => {
+    // API REST - Lista de recetas por categoría (con wildcard para cualquier base URL)
+    http.get('*/api/recetas', async ({ request }) => {
         console.log('MSW interceptando:', request.url);
         
         const url = new URL(request.url);
@@ -11,87 +11,87 @@ export const handlers = [
         
         console.log('Categoría solicitada:', categoria);
 
-        const eventosPorCategoria = {
-            'conciertos': [
-                { id: 1, nombre: 'Los Bunkers', fecha: '15-11-2025', lugar: 'Parque Metropolitano', categoria: 'Conciertos' },
-                { id: 2, nombre: 'Jazz Night', fecha: '20-11-2025', lugar: 'Teatro Municipal', categoria: 'Conciertos' },
-                { id: 3, nombre: 'Festival de música electrónica', fecha: '05-12-2025', lugar: 'Estadio Nacional', categoria: 'Conciertos' },
+        const recetasPorCategoria = {
+            'postres': [
+                { id: 1, titulo: 'Torta de Chocolate', dificultad: 'Media', categoria: 'Postres' },
+                { id: 2, titulo: 'Cheesecake de Fresa', dificultad: 'Fácil', categoria: 'Postres' },
+                { id: 3, titulo: 'Tiramisú Italiano', dificultad: 'Difícil', categoria: 'Postres' },
             ],
-            'conferencias': [
-                { id: 4, nombre: 'Tech Summit 2025', fecha: '25-11-2025', lugar: 'Costanera Center', categoria: 'Conferencias' },
-                { id: 5, nombre: 'Innovación Digital', fecha: '10-12-2025', lugar: 'Hotel Diego de Almagro', categoria: 'Conferencias' },
-                { id: 6, nombre: 'Futuro de la IA', fecha: '15-12-2025', lugar: 'Universidad de Chile', categoria: 'Conferencias' },
+            'platos-principales': [
+                { id: 4, titulo: 'Pasta Carbonara', dificultad: 'Media', categoria: 'Platos Principales' },
+                { id: 5, titulo: 'Pollo al Horno con Papas', dificultad: 'Fácil', categoria: 'Platos Principales' },
+                { id: 6, titulo: 'Salmón a la Parrilla', dificultad: 'Media', categoria: 'Platos Principales' },
             ],
-            'deportes': [
-                { id: 7, nombre: 'Santiago Open (Tenis)', fecha: '30-11-2025', lugar: 'Centro Deportivo Claro Arena', categoria: 'Deportes' },
-                { id: 8, nombre: 'Viña Maratón', fecha: '20-12-2025', lugar: 'Viña del Mar', categoria: 'Deportes' },
-                { id: 9, nombre: 'Final Copa América', fecha: '01-12-2025', lugar: 'Estadio Nacional', categoria: 'Deportes' },
+            'ensaladas': [
+                { id: 7, titulo: 'Ensalada César', dificultad: 'Fácil', categoria: 'Ensaladas' },
+                { id: 8, titulo: 'Ensalada Caprese', dificultad: 'Fácil', categoria: 'Ensaladas' },
+                { id: 9, titulo: 'Ensalada Griega', dificultad: 'Fácil', categoria: 'Ensaladas' },
             ],
-            'teatros': [
-                { id: 10, nombre: 'Romeo y Julieta', fecha: '18-11-2025', lugar: 'Teatro Nacional', categoria: 'Teatros' },
-                { id: 11, nombre: 'La Cenicienta', fecha: '08-12-2025', lugar: 'Teatro Bellas Artes', categoria: 'Teatros' },
-                { id: 12, nombre: 'El Fantasma de la Ópera', fecha: '22-12-2025', lugar: 'Gran Teatro', categoria: 'Teatros' },
+            'bebidas': [
+                { id: 10, titulo: 'Smoothie de Frutas', dificultad: 'Fácil', categoria: 'Bebidas' },
+                { id: 11, titulo: 'Limonada Casera', dificultad: 'Fácil', categoria: 'Bebidas' },
+                { id: 12, titulo: 'Café Frappé', dificultad: 'Media', categoria: 'Bebidas' },
             ],
+        };
+
+        await delay(1000);
+
+        // Si no se especifica categoría, devolver todas las recetas
+        if (!categoria) {
+            const todasLasRecetas = Object.values(recetasPorCategoria).flat();
+            console.log('Devolviendo todas las recetas:', todasLasRecetas.length);
+            return HttpResponse.json(todasLasRecetas);
+        }
+
+        // Retorna las recetas de la categoría solicitada
+        const recetas = recetasPorCategoria[categoria];
+        if (!recetas) {
+            console.log('Categoría no encontrada:', categoria);
+            return HttpResponse.json({}, { status: 404, statusText: `No se encontraron recetas para la categoría "${categoria}"` });
+        }
+
+        console.log('Devolviendo recetas para', categoria + ':', recetas.length);
+        return HttpResponse.json(recetas);
+    }),
+
+    // API GraphQL mock para detalles de recetas (con wildcard para cualquier base URL)
+    http.post('*/api/graphql', async (req) => {
+        const body = await req.request.json();
+        
+        // Datos detallados de recetas para GraphQL
+        const recetasDetalladas = {
+            1: { id: 1, ingredientes: 'Chocolate, huevos, harina, azúcar, mantequilla', metodoPreparacion: 'Mezclar ingredientes secos, agregar huevos batidos, hornear a 180°C por 35 minutos', tiempoCoccion: '35 minutos' },
+            2: { id: 2, ingredientes: 'Queso crema, galletas, fresas, azúcar, gelatina', metodoPreparacion: 'Triturar galletas para la base, mezclar queso con azúcar, refrigerar 4 horas', tiempoCoccion: '0 minutos (sin cocción)' },
+            3: { id: 3, ingredientes: 'Bizcochos, café, mascarpone, huevos, cacao', metodoPreparacion: 'Remojar bizcochos en café, alternar capas con crema de mascarpone, refrigerar', tiempoCoccion: '0 minutos (sin cocción)' },
+            4: { id: 4, ingredientes: 'Pasta, huevos, panceta, queso parmesano, pimienta', metodoPreparacion: 'Cocinar pasta, saltear panceta, mezclar con huevos y queso fuera del fuego', tiempoCoccion: '15 minutos' },
+            5: { id: 5, ingredientes: 'Pollo, papas, aceite de oliva, romero, ajo', metodoPreparacion: 'Marinar pollo, colocar con papas en bandeja, hornear a 200°C', tiempoCoccion: '45 minutos' },
+            6: { id: 6, ingredientes: 'Salmón, limón, eneldo, aceite, sal y pimienta', metodoPreparacion: 'Marinar salmón con limón y hierbas, cocinar a la parrilla 4 min por lado', tiempoCoccion: '8 minutos' },
+            7: { id: 7, ingredientes: 'Lechuga romana, crutones, pollo, aderezo césar, parmesano', metodoPreparacion: 'Mezclar lechuga con pollo, agregar crutones y aderezo, espolvorear queso', tiempoCoccion: '10 minutos (solo pollo)' },
+            8: { id: 8, ingredientes: 'Tomate, mozzarella, albahaca, aceite de oliva, sal', metodoPreparacion: 'Cortar tomate y queso en rodajas, alternar con albahaca, aliñar', tiempoCoccion: '0 minutos' },
+            9: { id: 9, ingredientes: 'Lechuga, tomate, pepino, cebolla, aceitunas, queso feta', metodoPreparacion: 'Cortar vegetales, mezclar con aceitunas y queso, aliñar con aceite y limón', tiempoCoccion: '0 minutos' },
+            10: { id: 10, ingredientes: 'Fresas, plátano, yogur, miel, hielo', metodoPreparacion: 'Licuar todas las frutas con yogur y hielo hasta obtener consistencia suave', tiempoCoccion: '0 minutos' },
+            11: { id: 11, ingredientes: 'Limones, agua, azúcar, hielo, menta', metodoPreparacion: 'Exprimir limones, mezclar con agua y azúcar, servir con hielo y menta', tiempoCoccion: '0 minutos' },
+            12: { id: 12, ingredientes: 'Café espresso, leche, azúcar, hielo, crema batida', metodoPreparacion: 'Preparar café doble, licuar con hielo y leche, servir con crema', tiempoCoccion: '5 minutos' },
         };
 
         await delay(800);
 
-        // Si no se especifica categoría, devolver todos los eventos
-        if (!categoria) {
-            const todosLosEventos = Object.values(eventosPorCategoria).flat();
-            console.log('Devolviendo todos los eventos:', todosLosEventos.length);
-            return HttpResponse.json(todosLosEventos);
-        }
-
-        // Retorna los eventos de la categoría solicitada
-        const eventos = eventosPorCategoria[categoria];
-        if (!eventos) {
-            console.log('Categoría no encontrada:', categoria);
-            return HttpResponse.json({}, { status: 404, statusText: `No se encontraron eventos para la categoría "${categoria}"` });
-        }
-
-        console.log('Devolviendo eventos para', categoria + ':', eventos.length);
-        return HttpResponse.json(eventos);
-    }),
-
-    // API GraphQL mock para detalles de eventos
-    http.post('/api/graphql', async (req) => {
-        const body = await req.request.json();
-        
-        // Datos detallados de eventos para GraphQL
-        const eventosDetallados = {
-            1: { id: 1, organizador: 'Producciones Musicales SA', asistentesConfirmados: 1500, descripcion: 'Un evento de rock al aire libre con la mejor banda nacional.' },
-            2: { id: 2, organizador: 'Jazz Club Internacional', asistentesConfirmados: 300, descripcion: 'Una noche íntima de jazz con músicos reconocidos mundialmente.' },
-            3: { id: 3, organizador: 'Electronic Events Ltd', asistentesConfirmados: 5000, descripcion: 'Festival de música electrónica con los mejores DJs del momento.' },
-            4: { id: 4, organizador: 'TechCorp Conferences', asistentesConfirmados: 800, descripcion: 'Conferencia sobre las últimas tendencias en tecnología y desarrollo de software.' },
-            5: { id: 5, organizador: 'Innovation Hub', asistentesConfirmados: 600, descripcion: 'Evento enfocado en la transformación digital y nuevas tecnologías empresariales.' },
-            6: { id: 6, organizador: 'AI Research Institute', asistentesConfirmados: 450, descripcion: 'Conferencia sobre inteligencia artificial y su impacto en el futuro.' },
-            7: { id: 7, organizador: 'Federación de Tenis', asistentesConfirmados: 200, descripcion: 'Torneo profesional de tenis con premios en efectivo.' },
-            8: { id: 8, organizador: 'Atletismo Municipal', asistentesConfirmados: 1200, descripcion: 'Maratón anual que recorre los principales sitios históricos de la ciudad.' },
-            9: { id: 9, organizador: 'ANFP', asistentesConfirmados: 2000, descripcion: 'Copa de fútbol profesional con selecciones de equipos de fútbol de Sudamérica.' },
-            10: { id: 10, organizador: 'Compañía Nacional de Teatro', asistentesConfirmados: 400, descripcion: 'Adaptación clásica de la obra de Shakespeare con un elenco excepcional.' },
-            11: { id: 11, organizador: 'Teatro Experimental', asistentesConfirmados: 250, descripcion: 'Live action de un clásico, para toda la familia.' },
-            12: { id: 12, organizador: 'Broadway Productions', asistentesConfirmados: 800, descripcion: 'Musical clásico con producción de nivel internacional.' },
-        };
-
-        await delay(600);
-
-        // Parsear la consulta GraphQL para obtener el ID del evento
-        if (body.query && body.query.includes('eventoDetalle')) {
-            const idMatch = body.query.match(/eventoDetalle\(id:\s*(\d+)\)/);
+        // Parsear la consulta GraphQL para obtener el ID de la receta
+        if (body.query && body.query.includes('recetaDetalle')) {
+            const idMatch = body.query.match(/recetaDetalle\(id:\s*(\d+)\)/);
             if (idMatch) {
-                const eventId = parseInt(idMatch[1]);
-                const eventoDetalle = eventosDetallados[eventId];
+                const recetaId = parseInt(idMatch[1]);
+                const recetaDetalle = recetasDetalladas[recetaId];
                 
-                if (eventoDetalle) {
+                if (recetaDetalle) {
                     return HttpResponse.json({
                         data: {
-                            eventoDetalle: eventoDetalle
+                            recetaDetalle: recetaDetalle
                         }
                     });
                 } else {
                     return HttpResponse.json({
-                        errors: [{ message: `Evento con ID ${eventId} no encontrado` }]
+                        errors: [{ message: `Receta con ID ${recetaId} no encontrada` }]
                     });
                 }
             }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
-import { eventosPorCategoria, eventosDetallados } from './data/eventosData';
+import { recetasPorCategoria, recetasDetalladas } from './data/recetasData';
 import './App.css';
 
 function App() {
@@ -9,43 +9,43 @@ function App() {
     <Router>
       <div className="App">
         <header className="App-header">
-          <h1>Centro de Eventos</h1>
+          <h1>🍳 Recetas Deliciosas</h1>
         </header>
 
         <div className="content">
           {/* Menú lateral */}
           <nav className="side-menu">
-            <h2>Categorías de Eventos</h2>
+            <h2>Categorías de Recetas</h2>
             <ul>
-              <li><Link to="/categoria/conciertos">Conciertos</Link></li>
-              <li><Link to="/categoria/conferencias">Conferencias</Link></li>
-              <li><Link to="/categoria/deportes">Deportes</Link></li>
-              <li><Link to="/categoria/teatros">Teatros</Link></li>
+              <li><Link to="/categoria/postres">🍰 Postres</Link></li>
+              <li><Link to="/categoria/platos-principales">🍝 Platos Principales</Link></li>
+              <li><Link to="/categoria/ensaladas">🥗 Ensaladas</Link></li>
+              <li><Link to="/categoria/bebidas">🍹 Bebidas</Link></li>
             </ul>
           </nav>
 
-          {/* Área principal que muestra eventos */}
+          {/* Área principal que muestra recetas */}
           <main className="book-list">
             <Routes>
-              <Route path="/categoria/:categoria" element={<EventosList />} />
-              <Route path="/evento/:id" element={<EventoDetalle />} />
-              <Route path="/" element={<p>Por favor selecciona una categoría para explorar los eventos disponibles.</p>} />
+              <Route path="/categoria/:categoria" element={<RecetasList />} />
+              <Route path="/receta/:id" element={<RecetaDetalle />} />
+              <Route path="/" element={<p>Por favor selecciona una categoría para explorar las recetas disponibles.</p>} />
             </Routes>
           </main>
         </div>
 
         <footer>
-          <p>© 2025 Centro de Eventos. Todos los derechos reservados.</p>
+          <p>© 2025 Recetas Deliciosas. Todos los derechos reservados.</p>
         </footer>
       </div>
     </Router>
   );
 }
 
-// Componente para listar eventos (usando API REST)
-function EventosList() {
+// Componente para listar recetas (usando API REST)
+function RecetasList() {
   const { categoria } = useParams();
-  const [eventos, setEventos] = useState([]);
+  const [recetas, setRecetas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -53,60 +53,61 @@ function EventosList() {
     setLoading(true);
     setError(null);
 
-    fetch(`/api/eventos?categoria=${encodeURIComponent(categoria)}`)
+    console.log('🔍 Iniciando petición a /api/recetas?categoria=' + categoria);
+
+    fetch(`/api/recetas?categoria=${encodeURIComponent(categoria)}`)
       .then((response) => {
-        console.log('Respuesta de eventos:', response);
+        console.log('📡 Respuesta de recetas:', response);
         if (!response.ok) {
           throw new Error(response.status + ' en la respuesta de la API: ' + response.statusText);
         }
         return response.json();
       })
       .then((data) => {
-        console.log('Datos recibidos de MSW:', data);
-        setEventos(data);
+        console.log('✅ Datos recibidos de MSW:', data);
+        setRecetas(data);
         setLoading(false);
       })
       .catch((error) => {
-        console.log('MSW no disponible, usando datos de fallback:', error.message);
+        console.error('❌ Error al cargar recetas:', error.message);
         // Usar datos de fallback cuando MSW no esté disponible
-        const eventosDelCategoria = eventosPorCategoria[categoria] || [];
-        setEventos(eventosDelCategoria);
+        const recetasDelCategoria = recetasPorCategoria[categoria] || [];
+        setRecetas(recetasDelCategoria);
         setError(null); // No mostrar error, usar fallback silenciosamente
         setLoading(false);
       });
   }, [categoria]);
 
-  if (loading) return <p>Cargando eventos...</p>;
+  if (loading) return <p>Cargando recetas...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <div>
-      <h2>Eventos de {categoria}</h2>
-      {eventos.length > 0 ? (
+      <h2>Recetas de {categoria}</h2>
+      {recetas.length > 0 ? (
         <div>
-          {eventos.map((evento) => (
-            <div key={evento.id} className="book">
-              <h3>{evento.nombre}</h3>
-              <p><strong>Fecha:</strong> {evento.fecha}</p>
-              <p><strong>Lugar:</strong> {evento.lugar}</p>
-              <p><strong>Categoría:</strong> {evento.categoria}</p>
-              <Link to={`/evento/${evento.id}`}>
+          {recetas.map((receta) => (
+            <div key={receta.id} className="book">
+              <h3>{receta.titulo}</h3>
+              <p><strong>Dificultad:</strong> {receta.dificultad}</p>
+              <p><strong>Categoría:</strong> {receta.categoria}</p>
+              <Link to={`/receta/${receta.id}`}>
                 <button>Ver Detalles</button>
               </Link>
             </div>
           ))}
         </div>
       ) : (
-        <p>No hay eventos disponibles para esta categoría.</p>
+        <p>No hay recetas disponibles para esta categoría.</p>
       )}
     </div>
   );
 }
 
-// Componente para mostrar detalles de un evento (usando API GraphQL)
-function EventoDetalle() {
+// Componente para mostrar detalles de una receta (usando API GraphQL)
+function RecetaDetalle() {
   const { id } = useParams();
-  const [eventoDetalle, setEventoDetalle] = useState(null);
+  const [recetaDetalle, setRecetaDetalle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -117,11 +118,11 @@ function EventoDetalle() {
     // Consulta GraphQL
     const query = `
       query {
-        eventoDetalle(id: ${id}) {
+        recetaDetalle(id: ${id}) {
           id
-          organizador
-          asistentesConfirmados
-          descripcion
+          ingredientes
+          metodoPreparacion
+          tiempoCoccion
         }
       }
     `;
@@ -145,31 +146,31 @@ function EventoDetalle() {
           throw new Error(data.errors[0].message);
         }
         console.log('Datos recibidos de GraphQL:', data);
-        setEventoDetalle(data.data.eventoDetalle);
+        setRecetaDetalle(data.data.recetaDetalle);
         setLoading(false);
       })
       .catch((error) => {
         console.log('GraphQL no disponible, usando datos de fallback:', error.message);
         // Usar datos de fallback cuando GraphQL no esté disponible
-        const detalleDelEvento = eventosDetallados[parseInt(id)];
-        setEventoDetalle(detalleDelEvento || null);
+        const detalleDeLaReceta = recetasDetalladas[parseInt(id)];
+        setRecetaDetalle(detalleDeLaReceta || null);
         setError(null); // No mostrar error, usar fallback silenciosamente
         setLoading(false);
       });
   }, [id]);
 
-  if (loading) return <p>Cargando detalles del evento...</p>;
+  if (loading) return <p>Cargando detalles de la receta...</p>;
   if (error) return <p>Error: {error}</p>;
-  if (!eventoDetalle) return <p>Evento no encontrado.</p>;
+  if (!recetaDetalle) return <p>Receta no encontrada.</p>;
 
   return (
     <div>
-      <h2>Detalles del Evento</h2>
+      <h2>Detalles de la Receta</h2>
       <div className="book">
         <h3>Información Detallada</h3>
-        <p><strong>Organizador:</strong> {eventoDetalle.organizador}</p>
-        <p><strong>Asistentes Confirmados:</strong> {eventoDetalle.asistentesConfirmados}</p>
-        <p><strong>Descripción:</strong> {eventoDetalle.descripcion}</p>
+        <p><strong>Ingredientes:</strong> {recetaDetalle.ingredientes}</p>
+        <p><strong>Método de Preparación:</strong> {recetaDetalle.metodoPreparacion}</p>
+        <p><strong>Tiempo de Cocción:</strong> {recetaDetalle.tiempoCoccion}</p>
         <Link to="/">
           <button>Volver al Inicio</button>
         </Link>
