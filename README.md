@@ -35,8 +35,8 @@ Esta aplicación es un catálogo interactivo de recetas que utiliza React Router
 
 1. Clona el repositorio:
 ```bash
-git clone https://github.com/javinunezr/recetario-app.git
-cd recetario-app
+git clone https://github.com/javinunezr/centro-eventos-app.git
+cd centro-eventos-app
 ```
 
 2. Instala las dependencias:
@@ -57,7 +57,7 @@ npx msw init public/ --save
 npm start
 ```
 Inicia la aplicación en modo desarrollo.
-Abre http://localhost:3000/recetario-app en el navegador.
+Abre http://localhost:3000/centro-eventos-app en el navegador.
 
 ### Testing
 
@@ -103,7 +103,7 @@ Despliega la aplicación en GitHub Pages.
 ## Estructura del Proyecto
 
 ```
-recetario-app/
+centro-eventos-app/
 ├── public/                 # Archivos públicos
 │   ├── index.html
 │   └── mockServiceWorker.js
@@ -165,7 +165,7 @@ El proyecto mantiene una cobertura mínima del 50% en:
 
 La aplicación está configurada para desplegarse automáticamente en GitHub Pages:
 
-URL de producción: https://javinunezr.github.io/recetario-app
+URL de producción: https://javinunezr.github.io/centro-eventos-app
 
 ## Contribuir
 
