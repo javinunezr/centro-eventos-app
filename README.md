@@ -1,191 +1,242 @@
-# Recetario App
+# 🐾 Sistema de Gestión Veterinaria - Cuidado Animal
 
-Aplicación web de recetas desarrollada con React que permite explorar y visualizar diferentes recetas organizadas por categorías.
+Sistema web de gestión de citas y pacientes para la veterinaria "Cuidado Animal", desarrollado con React como parte del proyecto final de Desarrollo Frontend II.
 
-## Descripción
+## 📋 Descripción del Proyecto
 
-Esta aplicación es un catálogo interactivo de recetas que utiliza React Router para la navegación y Mock Service Worker (MSW) para simular llamadas a APIs REST y GraphQL. Los usuarios pueden navegar por diferentes categorías de recetas y ver los detalles de cada una.
+La veterinaria "Cuidado Animal" ha experimentado un crecimiento significativo en su número de clientes y mascotas, lo que ha complicado la gestión manual de las citas y la información de los pacientes. Este sistema permite organizar y visualizar los datos de manera eficiente.
 
-## Características
+## ✨ Funcionalidades Principales
 
-- Navegación por categorías de recetas (Postres, Platos Principales, Ensaladas, Bebidas)
-- Visualización de detalles de cada receta
-- Integración con API REST mock para listar recetas
-- Integración con API GraphQL mock para detalles de recetas
-- Interfaz moderna y responsive
-- Testing con Jest y React Testing Library
-- Testing E2E con Cypress
+### 📅 Gestión de Citas
+- Visualización de citas agendadas por día
+- Máximo 8 citas por día
+- Información completa de cada cita:
+  - Veterinario encargado y especialidad
+  - Mascota atendida
+  - Dueño de la mascota
+  - Hora y motivo de la consulta
 
-## Tecnologías Utilizadas
+### 🐶🐱 Información de Mascotas
+- Lista completa de mascotas registradas
+- Historial médico detallado:
+  - Vacunas aplicadas
+  - Alergias conocidas
+  - Cirugías realizadas
+  - Medicamentos actuales
+  - Observaciones médicas
+  - Última visita
 
-- React 19.2.0
-- React Router DOM 7.9.6
-- Mock Service Worker (MSW) 2.12.2
-- GraphQL 16.12.0
-- Jest (incluido en react-scripts)
-- React Testing Library 16.3.0
-- Cypress 15.7.1
+### 👥 Gestión de Clientes
+- Lista de clientes con sus datos de contacto
+- Relación cliente-mascotas
+- Información de contacto (teléfono y dirección)
 
-## Requisitos Previos
+## 🛠️ Tecnologías Utilizadas
 
+### Frontend
+- **React** 19.2.0
+- **React Router DOM** 7.9.6 - Navegación entre páginas
+- **CSS3** - Estilos personalizados con gradientes y animaciones
+
+### Backend Mock
+- **MSW (Mock Service Worker)** 2.12.2 - Interceptación de peticiones HTTP
+- **GraphQL** 16.12.0 - API GraphQL mockeada
+- **@graphql-tools** - Herramientas para GraphQL
+
+### Testing
+- **Jest** - Tests unitarios
+- **React Testing Library** 16.3.0 - Tests de componentes React
+- **Cypress** - Tests End-to-End (E2E)
+- **MSW** - Mocking de APIs para tests
+
+## 📊 Cobertura de Pruebas
+
+El proyecto cumple con los siguientes requisitos de cobertura:
+
+- ✅ **Pruebas Unitarias**: > 70% de cobertura general
+  - Tests de datos (veterinariaData.test.js)
+  - Tests de handlers MSW (handlers.test.js)
+  
+- ✅ **Pruebas E2E**: > 50% de cobertura
+  - 22 tests E2E implementados en Cypress
+  - Navegación principal (7 tests)
+  - Detalles de mascotas (5 tests)
+  - Gestión de citas (10 tests)
+
+## 🚀 Instalación y Uso
+
+### Prerrequisitos
 - Node.js (versión 14 o superior)
 - npm o yarn
 
-## Instalación
+### Instalación
 
-1. Clona el repositorio:
 ```bash
+# Clonar el repositorio
 git clone https://github.com/javinunezr/centro-eventos-app.git
-cd centro-eventos-app
-```
 
-2. Instala las dependencias:
-```bash
+# Entrar al directorio
+cd centro-eventos-app
+
+# Instalar dependencias
 npm install
 ```
 
-3. Inicializa MSW (si no está configurado):
-```bash
-npx msw init public/ --save
-```
-
-## Scripts Disponibles
-
-### Desarrollo
+### Ejecutar en modo desarrollo
 
 ```bash
 npm start
 ```
-Inicia la aplicación en modo desarrollo.
-Abre http://localhost:3000/centro-eventos-app en el navegador.
 
-### Testing
+La aplicación se abrirá en [http://localhost:3000](http://localhost:3000)
+
+### Ejecutar pruebas
 
 ```bash
+# Ejecutar tests unitarios
 npm test
-```
-Ejecuta los tests unitarios en modo interactivo.
 
-```bash
+# Ejecutar tests unitarios con cobertura
 npm run test:coverage
-```
-Ejecuta los tests y genera un reporte de cobertura.
 
-### Testing E2E
-
-```bash
+# Abrir Cypress para tests E2E (modo interactivo)
 npm run cypress:open
-```
-Abre la interfaz de Cypress para ejecutar tests E2E de forma interactiva.
 
-```bash
+# Ejecutar tests E2E (modo headless)
 npm run cypress:run
 ```
-Ejecuta los tests E2E en modo headless.
 
-```bash
-npm run test:e2e
-```
-Inicia el servidor y ejecuta todos los tests E2E automáticamente.
-
-### Producción
+### Build para producción
 
 ```bash
 npm run build
 ```
-Compila la aplicación para producción en la carpeta `build`.
 
-```bash
-npm run deploy
-```
-Despliega la aplicación en GitHub Pages.
-
-## Estructura del Proyecto
+## 🏗️ Estructura del Proyecto
 
 ```
-centro-eventos-app/
-├── public/                 # Archivos públicos
-│   ├── index.html
-│   └── mockServiceWorker.js
-├── src/
-│   ├── data/              # Datos de prueba
-│   ├── mocks/             # Configuración de MSW
-│   │   ├── browser.js     # MSW para navegador
-│   │   ├── handlers.js    # Handlers de API
-│   │   └── server.js      # MSW para tests
-│   ├── App.js             # Componente principal
-│   ├── index.js           # Punto de entrada
-│   └── setupTests.js      # Configuración de tests
-├── cypress/               # Tests E2E
-│   ├── e2e/
-│   └── support/
-└── package.json
+src/
+├── App.js                      # Componente principal con rutas
+├── App.css                     # Estilos globales
+├── index.js                    # Punto de entrada
+├── data/
+│   ├── veterinariaData.js      # Datos mock de la veterinaria
+│   └── veterinariaData.test.js # Tests de datos
+├── mocks/
+│   ├── browser.js              # Configuración MSW para browser
+│   ├── server.js               # Configuración MSW para tests
+│   ├── handlers.js             # Handlers REST y GraphQL
+│   └── handlers.test.js        # Tests de handlers
+cypress/
+├── e2e/
+│   ├── navegacion.cy.js        # Tests E2E de navegación
+│   ├── detalles-mascotas.cy.js # Tests E2E de detalles
+│   └── gestion-citas.cy.js     # Tests E2E de citas
 ```
 
-## Categorías de Recetas
-
-La aplicación incluye las siguientes categorías:
-
-- **Postres**: Torta de Chocolate, Cheesecake de Fresa, Tiramisú Italiano
-- **Platos Principales**: Pasta Carbonara, Pollo al Horno con Papas, Salmón a la Parrilla
-- **Ensaladas**: Ensalada César, Ensalada Caprese, Ensalada Griega
-- **Bebidas**: Smoothie de Frutas, Limonada Casera, Café Frappé
-
-## API Mock
+## 🔌 APIs Implementadas
 
 ### REST API
 
-Endpoint: `/api/recetas`
-- Parámetro: `categoria` (opcional)
-- Retorna: Lista de recetas filtradas por categoría
+#### GET /api/citas?fecha=YYYY-MM-DD
+Obtiene las citas de un día específico (máximo 8)
+
+**Respuesta:**
+```json
+[
+  {
+    "id": 1,
+    "hora": "09:00",
+    "motivo": "Control rutinario",
+    "veterinario": {
+      "nombre": "Dra. Patricia López",
+      "especialidad": "Medicina General"
+    },
+    "mascota": {
+      "nombre": "Max",
+      "especie": "Perro",
+      "raza": "Golden Retriever"
+    },
+    "dueno": {
+      "nombre": "María González",
+      "telefono": "+56912345678"
+    }
+  }
+]
+```
+
+#### GET /api/clientes
+Obtiene la lista de todos los clientes
+
+#### GET /api/mascotas?clienteId={id}
+Obtiene todas las mascotas (opcionalmente filtradas por cliente)
 
 ### GraphQL API
 
-Endpoint: `/api/graphql`
-- Query: `recetaDetalle(id: Int)`
-- Retorna: Detalles completos de una receta (ingredientes, método de preparación, tiempo de cocción)
+#### Query: historialMedico(mascotaId: ID)
+Obtiene el historial médico completo de una mascota
 
-## Testing
+**Ejemplo:**
+```graphql
+query {
+  historialMedico(mascotaId: 1) {
+    vacunas
+    alergias
+    cirugias
+    medicamentos
+    peso
+    observaciones
+    mascota {
+      nombre
+      especie
+      raza
+    }
+    dueno {
+      nombre
+      telefono
+    }
+  }
+}
+```
 
-### Cobertura de Tests
+#### Query: clienteDetalle(id: ID)
+Obtiene los detalles de un cliente y sus mascotas
 
-El proyecto mantiene una cobertura mínima del 50% en:
-- Statements
-- Branches
-- Functions
-- Lines
+## 🎨 Características del Diseño
 
-### Tests Incluidos
+- **Colores temáticos**: Paleta verde inspirada en naturaleza y cuidado animal
+- **Interfaz intuitiva**: Navegación clara con menú lateral
+- **Responsive**: Diseño adaptable a dispositivos móviles
+- **Tarjetas informativas**: Organización visual de la información
+- **Gradientes y sombras**: Diseño moderno con profundidad visual
 
-- Tests unitarios para componentes
-- Tests de integración para handlers de MSW
-- Tests E2E para flujos de usuario completos
+## 📝 Decisiones de Diseño
 
-## Despliegue
+### Reutilización del Proyecto Anterior
+- ✅ Estructura de routing con React Router
+- ✅ Sistema de MSW para mocks (REST + GraphQL)
+- ✅ Arquitectura de componentes funcionales
+- ✅ Sistema de testing (Jest + Cypress)
+- ✅ Configuración de build y deploy
 
-La aplicación está configurada para desplegarse automáticamente en GitHub Pages:
+### Adaptaciones Realizadas
+- Datos de recetas → Datos veterinarios (clientes, mascotas, citas)
+- Categorías de recetas → Filtro por días de citas
+- Detalles de recetas → Historial médico
+- Tema culinario → Tema veterinario (verde, iconos de mascotas)
 
-URL de producción: https://javinunezr.github.io/centro-eventos-app
+## 👥 Autor
 
-## Contribuir
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
-## Licencia
-
-Este proyecto es privado y está desarrollado con fines educativos.
-
-## Autor
-
-Javier Núñez
+**Javier Núñez R.**
 - GitHub: [@javinunezr](https://github.com/javinunezr)
 
-## Notas Adicionales
+## 📄 Licencia
 
-- El proyecto utiliza MSW para simular APIs, por lo que no requiere un backend real
-- La configuración de MSW se inicializa automáticamente al cargar la aplicación
-- Los tests pueden ejecutarse sin conexión a internet
+Este proyecto es parte de un trabajo académico para la Universidad.
+
+---
+
+**Asignatura**: Desarrollo Frontend II  
+**Semana**: 9  
+**Año**: 2025
