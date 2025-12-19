@@ -32,43 +32,7 @@ La veterinaria "Cuidado Animal" ha experimentado un crecimiento significativo en
 - Relación cliente-mascotas
 - Información de contacto (teléfono y dirección)
 
-## 🛠️ Tecnologías Utilizadas
-
-### Frontend
-- **React** 19.2.0
-- **React Router DOM** 7.9.6 - Navegación entre páginas
-- **CSS3** - Estilos personalizados con gradientes y animaciones
-
-### Backend Mock
-- **MSW (Mock Service Worker)** 2.12.2 - Interceptación de peticiones HTTP
-- **GraphQL** 16.12.0 - API GraphQL mockeada
-- **@graphql-tools** - Herramientas para GraphQL
-
-### Testing
-- **Jest** - Tests unitarios
-- **React Testing Library** 16.3.0 - Tests de componentes React
-- **Cypress** - Tests End-to-End (E2E)
-- **MSW** - Mocking de APIs para tests
-
-## 📊 Cobertura de Pruebas
-
-El proyecto cumple con los siguientes requisitos de cobertura:
-
-- ✅ **Pruebas Unitarias**: > 70% de cobertura general
-  - Tests de datos (veterinariaData.test.js)
-  - Tests de handlers MSW (handlers.test.js)
-  
-- ✅ **Pruebas E2E**: > 50% de cobertura
-  - 22 tests E2E implementados en Cypress
-  - Navegación principal (7 tests)
-  - Detalles de mascotas (5 tests)
-  - Gestión de citas (10 tests)
-
 ## 🚀 Instalación y Uso
-
-### Prerrequisitos
-- Node.js (versión 14 o superior)
-- npm o yarn
 
 ### Instalación
 
@@ -211,32 +175,3 @@ Obtiene los detalles de un cliente y sus mascotas
 - **Tarjetas informativas**: Organización visual de la información
 - **Gradientes y sombras**: Diseño moderno con profundidad visual
 
-## 📝 Decisiones de Diseño
-
-### Reutilización del Proyecto Anterior
-- ✅ Estructura de routing con React Router
-- ✅ Sistema de MSW para mocks (REST + GraphQL)
-- ✅ Arquitectura de componentes funcionales
-- ✅ Sistema de testing (Jest + Cypress)
-- ✅ Configuración de build y deploy
-
-### Adaptaciones Realizadas
-- Datos de recetas → Datos veterinarios (clientes, mascotas, citas)
-- Categorías de recetas → Filtro por días de citas
-- Detalles de recetas → Historial médico
-- Tema culinario → Tema veterinario (verde, iconos de mascotas)
-
-## 👥 Autor
-
-**Javier Núñez R.**
-- GitHub: [@javinunezr](https://github.com/javinunezr)
-
-## 📄 Licencia
-
-Este proyecto es parte de un trabajo académico para la Universidad.
-
----
-
-**Asignatura**: Desarrollo Frontend II  
-**Semana**: 9  
-**Año**: 2025
